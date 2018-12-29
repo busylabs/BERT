@@ -1,18 +1,22 @@
-let pushbutton = new Pushbutton(20, 50, 'Kick');
-let joystick = new Joystick(80, 50, 'Drive');
+// let pushbutton = new Pushbutton(25, 50, 'Kick');
+let joystick = new Joystick(75, 50, 'Drive');
+let leftMotorSpeed, rightMotorSpeed;
 
-pushbutton.onClick = function() {
-  console.log("pushbutton clicked at " + pushbutton.x +" , " + pushbutton.y);
-};
+// pushbutton.onClick = function() {
+//   console.log("pushbutton clicked at " + pushbutton.x +" , " + pushbutton.y);
+//   send('kickerServoAngle=90');
+// };
 
-//pushbutton.onRelease = function() {};
+//  pushbutton.onMouseUp = function() {
+//   send('kickerServoAngle=180');
+//  };
 
 joystick.onClick = function() {
-  console.log("joystick clicked at " + joystick.x +" , " + joystick.y);
+  leftMotorSpeed = Math.ceil(twoWheelDriveLeftSpeed(joystick.x, joystick.y) * 2000);  // scale speed
+  rightMotorSpeed = Math.ceil(twoWheelDriveRightSpeed(joystick.x, joystick.y) * 2000);  // scale speed
+  send("leftMotorSpeed=" + leftMotorSpeed);
+  send("rightMotorSpeed=" + rightMotorSpeed);
+
+  console.log("leftMotorSpeed=" + leftMotorSpeed);
+  console.log("rightMotorSpeed=" + rightMotorSpeed);
 };
-//joystick.onRelease = function() {};
-
-
-// keyboard('LEFT_ARROW_KEY').onPress = function() {
-//   console.log('left arrow pressed');
-// }
